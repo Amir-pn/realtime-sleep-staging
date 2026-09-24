@@ -1,0 +1,25 @@
+# Python / environment
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Data (download from PhysioNet instead - never commit)
+data/
+*.edf
+*.npz
+*.npy
+
+# Training outputs (large / reproducible) - keep only the results table
+results/*
+!results/summary_table.csv
+*.pt
+
+# Sleep application (kept private, not uploaded)
+src/sleep_app.py
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

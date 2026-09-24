@@ -1,0 +1,12 @@
+# Install PyTorch with CUDA first (see README), then: pip install -r requirements.txt
+numpy
+scipy
+pandas
+scikit-learn
+xgboost
+mne
+PyWavelets
+joblib
+matplotlib
+tqdm
+torch
