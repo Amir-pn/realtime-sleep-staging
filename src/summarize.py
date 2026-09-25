@@ -21,6 +21,8 @@ OURS = [  # (name, json path, params, causal)
     ("Ours: CNN (1 epoch)", R / "cnn/cnn_edf78_foldall_overall.json", "34.6K", "yes"),
     ("Ours: CNN+GRU provisional (live)", R / "gru/gru_edf78_prov_overall.json", "60.4K", "yes"),
     ("Ours: CNN+GRU revised (+30 s)", R / "gru/gru_edf78_rev_overall.json", "60.4K", "yes (30 s delay)"),
+    ("Ours: CNN+GRU fine-tuned, live", R / "e2e/e2e_edf78_prov_overall.json", "60.4K", "yes"),
+    ("Ours: CNN+GRU fine-tuned, revised", R / "e2e/e2e_edf78_rev_overall.json", "60.4K", "yes (30 s delay)"),
 ]
 # Sleep-EDF-78 results reported in the original papers (protocols differ slightly)
 PAPERS = [

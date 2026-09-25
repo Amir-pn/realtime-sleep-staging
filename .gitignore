@@ -13,6 +13,9 @@ data/
 # Training outputs (large / reproducible) - keep only the results table
 results/*
 !results/summary_table.csv
+!results/st/
+results/st/*
+!results/st/st_results.csv
 *.pt
 
 # Sleep application (kept private, not uploaded)

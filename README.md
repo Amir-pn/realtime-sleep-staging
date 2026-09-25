@@ -16,6 +16,10 @@ A fully causal sleep-staging pipeline that outputs a sleep stage (W, N1, N2, N3,
 
 CPU latency: about 9 ms per 30 s epoch (single thread).
 
+External test, Sleep-EDF Sleep Telemetry (44 nights, zero-shot): single model 82.5 ± 0.7% accuracy, macro F1 79.3 ± 0.7, κ 0.750 ± 0.011.
+
+End-to-end fine-tuning of the encoder with the GRU did not improve validation macro F1 (82.1 vs 82.4), so the frozen two-stage model is the final model.
+
 ## Key features
 
 - **Causal end to end:** causal filters with carried state, fixed µV scaling, no whole-night statistics, and a one-directional GRU over the last 10 minutes.
@@ -47,6 +51,8 @@ python src/baseline_xgb.py --folds data/folds.json --context 0
 python src/baseline_xgb.py --folds data/folds.json --context 2
 python src/train.py --folds data/folds.json --fold all --epochs 20 --patience 20
 python src/train_gru.py --folds data/folds.json
+python src/train_e2e.py --folds data/folds.json --no_aug   # optional: end-to-end fine-tuning
+python src/eval_st.py --raw data/raw --out results/st       # external test on Sleep-EDF ST
 python src/summarize.py
 ```
 
@@ -61,11 +67,13 @@ python src/summarize.py
 | `baseline_xgb.py` | XGBoost baseline |
 | `dataset.py`, `model.py`, `train.py` | Per-epoch CNN |
 | `train_gru.py` | Causal GRU with provisional and revised heads |
+| `train_e2e.py` | Optional end-to-end fine-tuning of CNN + GRU (keeps the frozen model unless validation improves) |
+| `eval_st.py` | Zero-shot external test on Sleep-EDF Sleep Telemetry (10 fold models, ensemble and mean ± SD) |
 | `summarize.py` | Results table and CPU latency |
 
 ## Limitations
 
-- Single dataset: healthy adults, recorded 1987–91, R&K scoring.
+- Trained on healthy adults (recorded 1987–91, R&K scoring); external test so far only on Sleep-EDF ST (same montage).
 - Published results are quoted from their papers, not re-run on these folds.
 - Real-time use is simulated on recorded data; no hardware validation yet.
 - The Sleep Quality Score is not clinically validated.
